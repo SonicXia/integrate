@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-// 扫描mapper接口包，自动注入mapper
-@MapperScan("com.atsonic.integrate.modules.*.dao")
 public class MybatisPlusConfig {
 
     /**

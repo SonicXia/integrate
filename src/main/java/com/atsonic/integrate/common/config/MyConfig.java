@@ -5,12 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 
-/**
- * 　nice
- *
- * @author gaogao
- * @date 2018/11/29 16:32.
- */
 //@PropertySource(value = "{classpath:application-dev.properties}")
 @Component
 @ConfigurationProperties(prefix = "globle-config")

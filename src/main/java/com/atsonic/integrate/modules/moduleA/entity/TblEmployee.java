@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author Sonic
  * @since 2019-02-26
  */
-public class TblEmployee extends Model<TblEmployee> {
+public class TblEmployee extends Model<TblEmployee> implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
