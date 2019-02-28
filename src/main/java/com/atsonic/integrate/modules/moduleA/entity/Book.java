@@ -30,7 +30,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "ESBook{" +
                 "bookName='" + bookName + '\'' +
                 ", author='" + author + '\'' +
                 '}';

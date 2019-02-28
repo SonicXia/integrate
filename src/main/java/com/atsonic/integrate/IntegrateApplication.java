@@ -42,6 +42,24 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  */
 
+/**
+ * SpringBoot默认支持两种技术来和ES交互；
+ * 1、Jest（默认不生效）
+ * 	需要导入jest的工具包（io.searchbox.client.JestClient）
+ * 2、SpringData ElasticSearch【ES版本有可能不合适】
+ * 		版本适配说明：https://github.com/spring-projects/spring-data-elasticsearch
+ *		如果版本不适配：当前springboot版本下的默认ES版本为6.4.3，而docker中安装的ES版本为6.6.0
+ *			1）、升级SpringBoot版本
+ *			2）、安装对应版本的ES（6.6.0--> 6.4.3）
+ *		docker run -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -d -p 9201:9200 -p 9301:9300 --name ES02 01e5bee1e059
+ *
+ * 		1）、Client 节点信息clusterNodes；clusterName
+ * 		2）、ElasticsearchTemplate 操作es
+ *		3）、编写一个 ElasticsearchRepository 的子接口来操作ES；
+ *	两种用法：https://github.com/spring-projects/spring-data-elasticsearch
+ *	1）、编写一个 ElasticsearchRepository
+ */
+
 @SpringBootApplication
 @MapperScan("com.atsonic.integrate.modules.*.dao") // 扫描mapper接口包，自动注入mapper
 @EnableCaching
@@ -51,6 +69,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class IntegrateApplication {
 
     public static void main(String[] args) {
+        // 解决同时引入redis和elasticsearch时启动报错：
+        // Error creating bean with name 'elasticsearchClient', AvailableProcessors is already set to
+//        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(IntegrateApplication.class, args);
     }
 

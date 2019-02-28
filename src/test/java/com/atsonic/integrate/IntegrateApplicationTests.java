@@ -1,10 +1,15 @@
 package com.atsonic.integrate;
 
+import com.atsonic.integrate.modules.moduleA.entity.Article;
 import com.atsonic.integrate.modules.moduleA.entity.Book;
 import com.atsonic.integrate.modules.moduleA.dao.UserMapper;
 import com.atsonic.integrate.modules.moduleA.entity.User;
 import com.atsonic.integrate.modules.moduleA.task.AsyncService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import io.searchbox.client.JestClient;
+import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -20,6 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -40,6 +46,11 @@ public class IntegrateApplicationTests {
 
     @Autowired
     AmqpAdmin amqpAdmin;
+
+    @Autowired
+    JestClient jestClient;
+//    @Autowired
+//    ESBookRepository esBookRepository;
 
     @Autowired
     AsyncService asyncService;
@@ -172,6 +183,74 @@ public class IntegrateApplicationTests {
     public void sendMsg(){
         rabbitTemplate.convertAndSend("exchange.fanout","",new Book("红楼梦2","曹雪芹"));
     }
+
+    /**
+     * ======================= 测试 ElasticSearch ====================================
+     */
+    @Test
+    public void testElasticSearch() {
+        //1、给Es中索引（保存）一个文档；
+        Article article = new Article();
+        article.setId(1);
+        article.setTitle("好消息");
+        article.setAuthor("zhangsan");
+        article.setContent("Hello World");
+
+        //构建一个索引功能
+        Index index = new Index.Builder(article).index("atsonic").type("news").build();
+
+        try {
+            //执行
+            jestClient.execute(index);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //测试搜索
+    @Test
+    public void search(){
+
+        //查询表达式
+        String json ="{\n" +
+                "    \"query\" : {\n" +
+                "        \"match\" : {\n" +
+                "            \"content\" : \"hello\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        //更多操作：https://github.com/searchbox-io/Jest/tree/master/jest
+        //构建搜索功能
+        Search search = new Search.Builder(json).addIndex("atsonic").addType("news").build();
+
+        //执行
+        try {
+            SearchResult result = jestClient.execute(search);
+            System.out.println(result.getJsonString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+//    @Test
+//    public void testSpringDataES(){
+//		ESBook esBook = new ESBook();
+//        esBook.setId(1);
+//        esBook.setBookName("西游记");
+//        esBook.setAuthor("吴承恩");
+//        esBookRepository.index(esBook);
+//
+//
+////        for (ESBook esBook : esBookRepository.findByBookNameLike("游")) {
+////            System.out.println(esBook);
+////        }
+//
+//    }
+
 
     /**
      * ======================= 测试 异步 ====================================
