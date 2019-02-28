@@ -20,4 +20,6 @@ public interface UserService extends IService<User> {
 
     public User getUser2(Integer id);
 
+    User updateUser(User user);
+
 }

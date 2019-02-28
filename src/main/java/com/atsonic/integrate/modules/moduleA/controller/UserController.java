@@ -2,6 +2,7 @@ package com.atsonic.integrate.modules.moduleA.controller;
 
 import com.atsonic.integrate.modules.moduleA.entity.User;
 import com.atsonic.integrate.modules.moduleA.service.UserService;
+import com.atsonic.integrate.modules.moduleA.task.AsyncService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +26,27 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AsyncService asyncService;
+
     @GetMapping("/{id}")
-    public User getEmployee(@PathVariable("id") Integer id){
-        User user = userService.getUser2(id);
+    public User getUser(@PathVariable("id") Integer id){
+        User user = userService.getUser(id);
+//        User user = userService.getUser2(id);
         return user;
+    }
+
+    @GetMapping
+    public User updateUser(User user){
+        User newUser = userService.updateUser(user);
+        return newUser;
+    }
+
+    @GetMapping("/hello")
+    public String hello(){
+        asyncService.hello();
+        System.out.println("方法执行结束2");
+        return "success";
     }
 
 }
