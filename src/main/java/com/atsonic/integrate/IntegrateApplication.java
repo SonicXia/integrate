@@ -3,10 +3,13 @@ package com.atsonic.integrate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 一、搭建基本环境
@@ -74,5 +77,7 @@ public class IntegrateApplication {
 //        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(IntegrateApplication.class, args);
     }
+
+
 
 }

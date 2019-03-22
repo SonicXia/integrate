@@ -176,7 +176,7 @@ public class Tools {
         Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
         Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);
 
-        String userAgent = request.getHeader("User-Agent").toLowerCase();
+        String userAgent = request.getHeader("Myuser-Agent").toLowerCase();
 
         if (null == userAgent) {
             userAgent = "";

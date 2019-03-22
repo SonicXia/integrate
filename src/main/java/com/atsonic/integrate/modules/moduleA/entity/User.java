@@ -1,9 +1,13 @@
 package com.atsonic.integrate.modules.moduleA.entity;
 
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.activerecord.Model;
+
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -11,75 +15,64 @@ import java.io.Serializable;
  * </p>
  *
  * @author Sonic
- * @since 2019-02-26
+ * @since 2019-03-22
  */
-public class User extends Model<User> implements Serializable{
+public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键ID
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    /**
-     * 姓名
-     */
-    private String name;
-    /**
-     * 年龄
-     */
-    private Integer age;
-    /**
-     * 邮箱
-     */
-    private String email;
+    @TableId(value = "uid", type = IdType.AUTO)
+    private Integer uid;
+    private String username;
+    private String password;
 
+    @TableField(exist = false)
+    private Set<Role> Roles = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public Set<Role> getRoles() {
+        return Roles;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRoles(Set<Role> roles) {
+        Roles = roles;
     }
 
     @Override
     protected Serializable pkVal() {
-        return this.id;
+        return this.uid;
     }
 
     @Override
     public String toString() {
         return "User{" +
-        ", id=" + id +
-        ", name=" + name +
-        ", age=" + age +
-        ", email=" + email +
-        "}";
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", Roles=" + Roles +
+                '}';
     }
 }

@@ -2,8 +2,8 @@ package com.atsonic.integrate;
 
 import com.atsonic.integrate.modules.moduleA.entity.Article;
 import com.atsonic.integrate.modules.moduleA.entity.Book;
-import com.atsonic.integrate.modules.moduleA.dao.UserMapper;
-import com.atsonic.integrate.modules.moduleA.entity.User;
+import com.atsonic.integrate.modules.moduleA.dao.MyuserMapper;
+import com.atsonic.integrate.modules.moduleA.entity.Myuser;
 import com.atsonic.integrate.modules.moduleA.task.AsyncService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import io.searchbox.client.JestClient;
@@ -33,7 +33,7 @@ import java.util.*;
 public class IntegrateApplicationTests {
 
     @Autowired
-    UserMapper userMapper;
+    MyuserMapper myuserMapper;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -66,12 +66,12 @@ public class IntegrateApplicationTests {
     @Test
     public void testMyBatisPlus() {
         System.out.println(("----- selectAll method test ------"));
-////        List<User> userList = userMapper.selectList(null);
+////        List<Myuser> userList = myuserMapper.selectList(null);
 ////        Assert.assertEquals(5, userList.size());
 ////        userList.forEach(System.out::println);
 
-        List<User> users = userMapper.selectList(new EntityWrapper<User>());
-        users.stream().sorted(Comparator.comparing(User::getAge).reversed()).forEach(System.out::println);
+        List<Myuser> myusers = myuserMapper.selectList(new EntityWrapper<Myuser>());
+        myusers.stream().sorted(Comparator.comparing(Myuser::getAge).reversed()).forEach(System.out::println);
     }
 
     /**
@@ -101,13 +101,13 @@ public class IntegrateApplicationTests {
     //测试保存对象
     @Test
     public void testRedis02(){
-        User user = userMapper.selectById(1);
+        Myuser myuser = myuserMapper.selectById(1);
         //默认如果保存对象，使用jdk序列化机制，序列化后的数据保存到redis中
         //redisTemplate.opsForValue().set("emp-01",empById);
         //1、将数据以json的方式保存
         //(1)自己将对象转为json
         //(2)redisTemplate默认的序列化规则；改变默认的序列化规则；
-//        userRedisTemplate.opsForValue().set("user-01",user);
+//        userRedisTemplate.opsForValue().set("myuser-01",myuser);
     }
 
 

@@ -1,6 +1,6 @@
 package com.atsonic.integrate.modules.moduleA.dao;
 
-import com.atsonic.integrate.modules.moduleA.entity.User;
+import com.atsonic.integrate.modules.moduleA.entity.Role;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author Sonic
  * @since 2019-03-22
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface RoleMapper extends BaseMapper<Role> {
 
 }

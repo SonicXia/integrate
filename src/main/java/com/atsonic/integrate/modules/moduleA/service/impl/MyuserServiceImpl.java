@@ -1,8 +1,8 @@
 package com.atsonic.integrate.modules.moduleA.service.impl;
 
-import com.atsonic.integrate.modules.moduleA.entity.User;
-import com.atsonic.integrate.modules.moduleA.dao.UserMapper;
-import com.atsonic.integrate.modules.moduleA.service.UserService;
+import com.atsonic.integrate.modules.moduleA.dao.MyuserMapper;
+import com.atsonic.integrate.modules.moduleA.entity.Myuser;
+import com.atsonic.integrate.modules.moduleA.service.MyuserService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.stereotype.Service;
  * @since 2019-02-26
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class MyuserServiceImpl extends ServiceImpl<MyuserMapper, Myuser> implements MyuserService {
 
     @Autowired
-    UserMapper userMapper;
+    MyuserMapper myuserMapper;
 
     /**
      * 将方法的运行结果进行缓存；以后再要相同的数据，直接从缓存中获取，不用调用方法；
@@ -97,15 +97,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      *
      */
     @Cacheable(value = {"user"}/*,keyGenerator = "myKeyGenerator",condition = "#a0>1",unless = "#a0==2"*/)
-    public User getUser(Integer id){
+    public Myuser getUser(Integer id){
         System.out.println("查询"+id+"号用户");
-        User user = userMapper.getUserById(id);
-        return user;
+        Myuser myuser = myuserMapper.getUserById(id);
+        return myuser;
     }
 
     @Cacheable(value = {"user1", "user2"}, key = "#root.caches[0].name")
     @Override
-    public User getUser2(Integer id) {
+    public Myuser getUser2(Integer id) {
         System.out.println("2查询"+id+"号用户");
         return baseMapper.selectById(id);
     }
@@ -133,11 +133,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      *
      */
     @CachePut(value = "user",key = "#result.id")
-    public User updateUser(User user){
-        System.out.println("updateUser:"+user);
-        userMapper.update(user, new EntityWrapper<User>().eq("id", user.getId()));
-        User newUser = userMapper.selectById(user.getId());
-        return newUser;
+    public Myuser updateUser(Myuser myuser){
+        System.out.println("updateUser:"+ myuser);
+        myuserMapper.update(myuser, new EntityWrapper<Myuser>().eq("id", myuser.getId()));
+        Myuser newMyuser = myuserMapper.selectById(myuser.getId());
+        return newMyuser;
     }
 
 
@@ -154,7 +154,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @CacheEvict(value="user",beforeInvocation = true/*key = "#id",*/)
     public void deleteUser(Integer id){
         System.out.println("deleteUser:"+id);
-        userMapper.deleteById(id);
+        myuserMapper.deleteById(id);
 //        int i = 10/0;
     }
 
