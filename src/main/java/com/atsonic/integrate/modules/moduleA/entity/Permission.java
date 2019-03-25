@@ -23,7 +23,6 @@ public class Permission extends Model<Permission> {
     private String name;
     private String url;
 
-
     public Integer getPid() {
         return pid;
     }

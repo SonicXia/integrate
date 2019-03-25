@@ -19,4 +19,6 @@ public interface MyuserService extends IService<Myuser> {
 
     Myuser updateUser(Myuser myuser);
 
+    String getUsername();
+
 }

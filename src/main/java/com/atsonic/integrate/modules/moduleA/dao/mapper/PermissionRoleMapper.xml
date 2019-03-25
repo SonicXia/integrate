@@ -4,13 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.atsonic.integrate.modules.moduleA.entity.PermissionRole">
+        <id column="id" property="id" />
         <result column="rid" property="rid" />
         <result column="pid" property="pid" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        rid, pid
+        id, rid, pid
     </sql>
 
 </mapper>

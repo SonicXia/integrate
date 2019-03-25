@@ -158,4 +158,8 @@ public class MyuserServiceImpl extends ServiceImpl<MyuserMapper, Myuser> impleme
 //        int i = 10/0;
     }
 
+    @Override
+    public String getUsername() {
+        return baseMapper.getUsername();
+    }
 }

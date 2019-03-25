@@ -48,5 +48,11 @@ public class MyuserController {
         return "success";
     }
 
+    @GetMapping("/test")
+    public String test(){
+        String username = myuserService.getUsername();
+        return username;
+    }
+
 }
 

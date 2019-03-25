@@ -16,9 +16,17 @@ public class UserRole extends Model<UserRole> {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
     private Integer uid;
     private Integer rid;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getUid() {
         return uid;
@@ -44,8 +52,9 @@ public class UserRole extends Model<UserRole> {
     @Override
     public String toString() {
         return "UserRole{" +
-        ", uid=" + uid +
-        ", rid=" + rid +
-        "}";
+                "id=" + id +
+                ", uid=" + uid +
+                ", rid=" + rid +
+                '}';
     }
 }

@@ -15,4 +15,10 @@
         id, name, age, email
     </sql>
 
+    <select id="getUsername" resultType="java.lang.String">
+        select username from user where uid = '1';
+
+    </select>
+
+
 </mapper>

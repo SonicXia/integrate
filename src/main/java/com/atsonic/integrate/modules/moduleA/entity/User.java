@@ -27,7 +27,7 @@ public class User extends Model<User> {
     private String password;
 
     @TableField(exist = false)
-    private Set<Role> Roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     public Integer getUid() {
         return uid;
@@ -54,11 +54,11 @@ public class User extends Model<User> {
     }
 
     public Set<Role> getRoles() {
-        return Roles;
+        return roles;
     }
 
     public void setRoles(Set<Role> roles) {
-        Roles = roles;
+        this.roles = roles;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class User extends Model<User> {
                 "uid=" + uid +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", Roles=" + Roles +
+                ", roles=" + roles +
                 '}';
     }
 }

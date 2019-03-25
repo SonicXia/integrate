@@ -1,7 +1,5 @@
 package com.atsonic.integrate.modules.moduleA.entity;
 
-import com.atsonic.integrate.modules.moduleA.model.oPermission;
-import com.atsonic.integrate.modules.moduleA.model.oUser;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -28,9 +26,9 @@ public class Role extends Model<Role> {
     private String rname;
 
     @TableField(exist = false)
-    private Set<Permission> Permissions = new HashSet<>();
+    private Set<Permission> permissions = new HashSet<>();
     @TableField(exist = false)
-    private Set<User> Users = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 
     public Integer getRid() {
         return rid;
@@ -49,19 +47,19 @@ public class Role extends Model<Role> {
     }
 
     public Set<Permission> getPermissions() {
-        return Permissions;
+        return permissions;
     }
 
     public void setPermissions(Set<Permission> permissions) {
-        Permissions = permissions;
+        this.permissions = permissions;
     }
 
     public Set<User> getUsers() {
-        return Users;
+        return users;
     }
 
     public void setUsers(Set<User> users) {
-        Users = users;
+        this.users = users;
     }
 
     @Override
@@ -74,8 +72,8 @@ public class Role extends Model<Role> {
         return "Role{" +
                 "rid=" + rid +
                 ", rname='" + rname + '\'' +
-                ", Permissions=" + Permissions +
-                ", Users=" + Users +
+                ", permissions=" + permissions +
+                ", users=" + users +
                 '}';
     }
 }

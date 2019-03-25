@@ -16,9 +16,17 @@ public class PermissionRole extends Model<PermissionRole> {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
     private Integer rid;
     private Integer pid;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getRid() {
         return rid;
@@ -44,8 +52,9 @@ public class PermissionRole extends Model<PermissionRole> {
     @Override
     public String toString() {
         return "PermissionRole{" +
-        ", rid=" + rid +
-        ", pid=" + pid +
-        "}";
+                "id=" + id +
+                ", rid=" + rid +
+                ", pid=" + pid +
+                '}';
     }
 }
