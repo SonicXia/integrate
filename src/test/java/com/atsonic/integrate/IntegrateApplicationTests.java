@@ -16,6 +16,10 @@ import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
@@ -297,5 +301,40 @@ public class IntegrateApplicationTests {
         mailSender.send(mimeMessage);
 
     }
+
+    /**
+     * ======================= 测试 mongodb ====================================
+     */
+
+    /**
+     * 带条件分页倒排序查询
+     * 直接copy的例子
+     * 伪代码
+     *
+     * @param userid
+     * @param pageSize
+     * @param pageNum
+     * @return
+     * @throws Exception
+     */
+    /*public List<ConfReport> handleConfReportList(String userid, Integer pageSize, Integer pageNum) throws Exception {
+        Query query = new Query(Criteria.where("userid").is(userid))
+                .skip((pageNum - 1) * pageSize)
+                .limit(pageSize)
+                .with(new Sort(Sort.Direction.DESC, "create_time"));
+        return mongoDBDao.find(query, ConfReport.class, "conf_report");
+    }*/
+
+    /**
+     * 根据条件更新mongodb中对应的collection
+     * 伪代码
+     */
+    /*public void updateMongodb(String id) {
+        Query query = new Query(Criteria.where("id").is(id));
+        Update update = new Update();
+        String confStatus = "01";
+        update.set("conf_status", confStatus);
+        mongoDBDao.update(query, update, ConfReport.class);
+    }*/
 
 }

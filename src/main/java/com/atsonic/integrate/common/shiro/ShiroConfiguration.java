@@ -30,6 +30,10 @@ public class ShiroConfiguration {
 		bean.setUnauthorizedUrl("/shiro/unauthorized");
 
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+		//当前测试websocket使用，anon 即开放shiro的拦截，直接放行
+		// （注意放行的url要放在众多url的前面，至少要放到/**的前面，因为是从上到下的顺序过滤的）
+		filterChainDefinitionMap.put("/websocket/**", "anon");
+
 		filterChainDefinitionMap.put("/shiro/index", "authc"); // <url, 指定的拦截器处理>
 		filterChainDefinitionMap.put("/shiro/login", "anon");
 		filterChainDefinitionMap.put("/shiro/loginUser", "anon");
